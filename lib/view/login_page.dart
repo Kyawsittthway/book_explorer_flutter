@@ -1,4 +1,3 @@
-import 'package:book_explorer/view/search_page.dart';
 import 'package:book_explorer/view/search_result_page.dart';
 import 'package:book_explorer/view/sign_up_page.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +46,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 ReusableElevatedButton(title: "Sign In",onPressAction: (){
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => SearchPage()));
+                      MaterialPageRoute(builder: (_) => SearchResultPage()));
                 }),
                 SizedBox(
                   height: 20,

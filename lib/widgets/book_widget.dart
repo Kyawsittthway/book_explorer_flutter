@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class BookWidget extends StatelessWidget {
-  const BookWidget({Key? key}) : super(key: key);
+  String bookName;
+  String authors;
+  String imgPath;
+   BookWidget({Key? key,required this.bookName,required this.authors,required this.imgPath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class BookWidget extends StatelessWidget {
               height: 180,
               width: 130,
               child: Image.network(
-                  "https://www.dbooks.org/img/books/1906434468s.jpg",fit: BoxFit.fill,),
+                  imgPath,fit: BoxFit.fill,),
             ),
               Positioned(
                 left: 85,
@@ -36,7 +39,7 @@ class BookWidget extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Text(
-                  "Performance Tuning with SQL Server Dynamic Managment Vies",
+                 bookName,
                   maxLines: 3,
                   style: TextStyle(
                     fontSize: 16,
@@ -46,12 +49,15 @@ class BookWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20,),
-              Text("Louis Davidson and Tim Ford",style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w300,
-                overflow: TextOverflow.ellipsis,
-                fontStyle: FontStyle.italic,
-              ),),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.5,
+                child: Text(authors,maxLines:2,style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                  overflow: TextOverflow.ellipsis,
+                  fontStyle: FontStyle.italic,
+                ),),
+              ),
             ],
           )
         ],

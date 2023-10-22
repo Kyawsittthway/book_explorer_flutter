@@ -16,7 +16,7 @@ class FavouritePage extends StatelessWidget {
             ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemBuilder: (context, index) => BookWidget(),
+              itemBuilder: (context, index) => Container(),
               itemCount: 10,
             )
           ],
