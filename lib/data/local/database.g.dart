@@ -61,7 +61,7 @@ class _$AppDatabase extends AppDatabase {
     changeListener = listener ?? StreamController<String>.broadcast();
   }
 
-  UserDao? _personDaoInstance;
+  UserDao? _userDaoInstance;
 
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback? callback]) async {
@@ -91,8 +91,8 @@ class _$AppDatabase extends AppDatabase {
   }
 
   @override
-  UserDao get personDao {
-    return _personDaoInstance ??= _$UserDao(database, changeListener);
+  UserDao get userDao {
+    return _userDaoInstance ??= _$UserDao(database, changeListener);
   }
 }
 

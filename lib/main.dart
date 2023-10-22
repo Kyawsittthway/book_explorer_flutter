@@ -1,12 +1,17 @@
+import 'package:book_explorer/data/local/dao/user_dao.dart';
 import 'package:book_explorer/view/login_page.dart';
-import 'package:book_explorer/view/search_result_page.dart';
-import 'package:book_explorer/view/setting_page.dart';
 import 'package:book_explorer/viewmodel/search_result_view_model.dart';
-import 'package:book_explorer/widgets/book_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+import 'data/local/database.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  final database = await $FloorAppDatabase
+      .databaseBuilder('app_database.db')
+      .build();
+  final userDao = database.personDao;
   runApp( MyApp());
 }
 
