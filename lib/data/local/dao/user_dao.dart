@@ -6,8 +6,8 @@ import '../../../model/user_vo.dart';
 abstract class UserDao{
   
 
-  @Query('SELECT * FROM Person WHERE name = :name AND password = :password')
-  Stream<UserVO?> findUserByNameAndPassword(String name,String password);
+  @Query('SELECT * FROM UserVO WHERE name = :name AND password = :password')
+  Future<UserVO?> findUserByNameAndPassword(String name,String password);
 
   @insert
   Future<void> insertPerson(UserVO user);

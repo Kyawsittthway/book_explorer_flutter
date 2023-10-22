@@ -82,7 +82,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `UserVO` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `password` TEXT NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `UserVO` (`id` INTEGER, `name` TEXT NOT NULL, `password` TEXT NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -98,7 +98,7 @@ class _$AppDatabase extends AppDatabase {
 
 class _$UserDao extends UserDao {
   _$UserDao(this.database, this.changeListener)
-      : _queryAdapter = QueryAdapter(database, changeListener),
+      : _queryAdapter = QueryAdapter(database),
         _userVOInsertionAdapter = InsertionAdapter(
             database,
             'UserVO',
@@ -106,8 +106,7 @@ class _$UserDao extends UserDao {
                   'id': item.id,
                   'name': item.name,
                   'password': item.password
-                },
-            changeListener),
+                }),
         _userVODeletionAdapter = DeletionAdapter(
             database,
             'UserVO',
@@ -116,8 +115,7 @@ class _$UserDao extends UserDao {
                   'id': item.id,
                   'name': item.name,
                   'password': item.password
-                },
-            changeListener);
+                });
 
   final sqflite.DatabaseExecutor database;
 
@@ -130,14 +128,13 @@ class _$UserDao extends UserDao {
   final DeletionAdapter<UserVO> _userVODeletionAdapter;
 
   @override
-  Stream<UserVO?> findUserByNameAndPassword(String name, String password) {
-    return _queryAdapter.queryStream(
-        'SELECT * FROM Person WHERE name = ?1 AND password = ?2',
-        mapper: (Map<String, Object?> row) => UserVO(
-            row['id'] as int, row['name'] as String, row['password'] as String),
-        arguments: [name, password],
-        queryableName: 'UserVO',
-        isView: false);
+  Future<UserVO?> findUserByNameAndPassword(
+      String name, String password) async {
+    return _queryAdapter.query(
+        'SELECT * FROM UserVO WHERE name = ?1 AND password = ?2',
+        mapper: (Map<String, Object?> row) => UserVO(row['id'] as int?,
+            row['name'] as String, row['password'] as String),
+        arguments: [name, password]);
   }
 
   @override
