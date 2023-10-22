@@ -37,10 +37,13 @@ dependencies:
   lottie:
   http: ^0.13.5
   provider: ^6.0.5
+  floor:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  floor_generator:
+  build_runner:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
