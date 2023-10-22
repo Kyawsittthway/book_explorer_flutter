@@ -19,6 +19,7 @@ class SearchResultPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Result"),
         centerTitle: true,
+        leading: Container(),
         actions: [
           IconButton(
               onPressed: () {

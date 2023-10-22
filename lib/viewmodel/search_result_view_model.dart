@@ -44,9 +44,16 @@ class SearchResultViewModel extends ChangeNotifier{
       if (response is Success) {
         print("success");
         BaseResponseVO baseResponse = response.respsonse as BaseResponseVO;
-        setBookList(baseResponse.books);
-        setLoading(false);
-        setShowTotal(true);
+        if(baseResponse.status == "Not Found"){
+          setLoading(false);
+          setShowTotal(true);
+
+        }else{
+          setBookList(baseResponse.books ?? []);
+          setLoading(false);
+          setShowTotal(true);
+        }
+
       }
       if (response is Failure) {
         print("false");
