@@ -8,7 +8,11 @@ class ReusableTextFormField extends StatelessWidget {
   Icon? prefixIcon;
   bool isPassword;
   ReusableTextFormField(
-      {Key? key, required this.controller, required this.hint,this.prefixIcon,required this.isPassword})
+      {Key? key,
+      required this.controller,
+      required this.hint,
+      this.prefixIcon,
+      required this.isPassword})
       : super(key: key);
 
   @override
@@ -18,7 +22,7 @@ class ReusableTextFormField extends StatelessWidget {
       height: TEXT_FIELD_HEIGHT,
       child: TextFormField(
         controller: controller,
-        obscureText: isPassword? true:false,
+        obscureText: isPassword ? true : false,
         decoration: InputDecoration(
             filled: true,
             prefixIcon: prefixIcon ?? null,

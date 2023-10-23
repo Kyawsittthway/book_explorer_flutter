@@ -16,7 +16,7 @@ class SettingViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  logOut() async{
+  logOut() async {
     setIsLoading(true);
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final int? currentId = prefs.getInt("loginUserId");
@@ -24,18 +24,17 @@ class SettingViewModel extends ChangeNotifier {
     await prefs.remove("loginUserId");
 
     setIsLoading(false);
-
-
   }
-  removeUser() async{
+
+  removeUser() async {
     setIsLoading(true);
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final int? currentId = prefs.getInt("loginUserId");
     List<UserVO> userList = await userDao.findAllUsers();
-   var user=  userList.where((element) => element.id == currentId);
-   // print("user :: ${user.first.id}");
+    var user = userList.where((element) => element.id == currentId);
+    // print("user :: ${user.first.id}");
     userDao.deletePerson(user.first);
-   setIsLoading(false);
+    setIsLoading(false);
     // userDao.deletePerson(user);
   }
 }

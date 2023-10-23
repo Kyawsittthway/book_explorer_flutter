@@ -1,7 +1,7 @@
 import 'package:floor/floor.dart';
 
 @entity
-class UserVO{
+class UserVO {
   @primaryKey
   int? id;
 

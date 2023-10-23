@@ -31,7 +31,7 @@ class LoginViewModel extends ChangeNotifier {
   LoginViewModel(this.userDao) {}
 
   Future<UserVO?> login(BuildContext context) async {
-    if(nameController.text.isNotEmpty && passwordController.text.isNotEmpty){
+    if (nameController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       setLoading(true);
       var result = await userDao.findUserByNameAndPassword(
@@ -43,12 +43,10 @@ class LoginViewModel extends ChangeNotifier {
         setIsLoggedIn(true);
         prefs.setInt("loginUserId", result.id ?? 0);
         setLoading(false);
-
       }
       clearInputs();
       return result;
     }
-
   }
 
   goToSearchPage(BuildContext context) {
@@ -56,7 +54,7 @@ class LoginViewModel extends ChangeNotifier {
         context, MaterialPageRoute(builder: (_) => SearchResultPage()));
   }
 
-  void clearInputs(){
+  void clearInputs() {
     nameController.clear();
     passwordController.clear();
   }

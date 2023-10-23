@@ -1,13 +1,13 @@
-class Success{
+class Success {
   int code;
   Object respsonse;
 
-  Success(this.code,this.respsonse);
+  Success(this.code, this.respsonse);
 }
 
-class Failure{
+class Failure {
   int code;
   Object respsonse;
 
-  Failure(this.code,this.respsonse);
+  Failure(this.code, this.respsonse);
 }

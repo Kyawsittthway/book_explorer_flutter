@@ -27,13 +27,14 @@ class FavouritePage extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) => BookWidget(
-                  bookName: viewModel.favList[index].title,
-                  authors: viewModel.favList[index].authors,
-                  imgPath: viewModel.favList[index].image,
-                  isFav: true,
-                  onPressedAction: (){
-                    viewModel.favButtonAction(viewModel.favList[index]);
-                  },),
+                bookName: viewModel.favList[index].title,
+                authors: viewModel.favList[index].authors,
+                imgPath: viewModel.favList[index].image,
+                isFav: true,
+                onPressedAction: () {
+                  viewModel.favButtonAction(viewModel.favList[index]);
+                },
+              ),
               itemCount: viewModel.favList.length,
             )
           ],

@@ -1,4 +1,4 @@
-const BASE_URL =  'www.dbooks.org';
+const BASE_URL = 'www.dbooks.org';
 const SEARCH_ROUTE = '/api/search/';
 
 /// Errors

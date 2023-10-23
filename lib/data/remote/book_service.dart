@@ -7,17 +7,15 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class BookService {
-
   static Future<Object> getBooks(String bookName) async {
+    var url = Uri.https(BASE_URL, SEARCH_ROUTE, {'q': '{$bookName}'});
 
-      var url = Uri.https(BASE_URL, SEARCH_ROUTE, {'q': '{$bookName}'});
-
-      // Await the http get response, then decode the json-formatted response.
-      var response = await http.get(url);
-      print("Response :: ${response.statusCode}" );
-      if (response.statusCode == 200) {
-        return Success(200, baseResponseVoFromJson(response.body));
-      }else{
+    // Await the http get response, then decode the json-formatted response.
+    var response = await http.get(url);
+    print("Response :: ${response.statusCode}");
+    if (response.statusCode == 200) {
+      return Success(200, baseResponseVoFromJson(response.body));
+    } else {
       return Failure(USER_INVALID_RESPONSE, 'Invalid Response');
     }
     // try {

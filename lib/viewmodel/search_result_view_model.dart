@@ -49,7 +49,6 @@ class SearchResultViewModel extends ChangeNotifier {
   }
 
   setBookList(List<BookVO> bookList) {
-
     _bookList = bookList;
     print(_bookList);
     if (!bookList.isEmpty) {
@@ -145,7 +144,7 @@ class SearchResultViewModel extends ChangeNotifier {
     return contain.isEmpty ? false : true;
   }
 
-  void clearUp(){
+  void clearUp() {
     searchController.clear();
     bookList.clear();
     hideSeeMore = true;

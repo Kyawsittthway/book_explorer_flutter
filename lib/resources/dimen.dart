@@ -22,6 +22,7 @@ const double TEXT_FIELD_HEIGHT = 45;
 
 ///Setting Items Widget Dimens
 const double SETTING_ITEM_HEIGHT = 80;
+
 ///Border Radius
 const double NORMAL_BORDER_RADIUS = 20;
 
@@ -35,4 +36,3 @@ const double PADDING_40X = 40;
 ///Icon Size
 const double DEFAULT_ICON_SIZE = 30;
 const double MEDIUM_ICON_SIZE = 40;
-

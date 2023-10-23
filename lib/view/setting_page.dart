@@ -27,7 +27,8 @@ class SettingPage extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(vertical: PADDING_20X, horizontal: PADDING_10X),
+          padding: EdgeInsets.symmetric(
+              vertical: PADDING_20X, horizontal: PADDING_10X),
           child: Column(
             children: [
               SettingItemWidget(
@@ -41,8 +42,9 @@ class SettingPage extends StatelessWidget {
                   viewModel.setIsLoading(true);
                   Future.delayed(Duration(milliseconds: 1000), () {
                     viewModel.setIsLoading(false);
-                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                        LoginPage()), (Route<dynamic> route) => false);
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        (Route<dynamic> route) => false);
                     // Navigator.push(context,
                     //     MaterialPageRoute(builder: (_) => LoginPage()));
                   });
@@ -57,15 +59,16 @@ class SettingPage extends StatelessWidget {
                   Icons.remove_circle,
                   size: DEFAULT_ICON_SIZE,
                 ),
-                onTapAction: ()async {
-                 await viewModel.removeUser();
-                 defaultShowDialog(context, ACCOUNT_DELETED_TEXT, Icons.delete,true);
-                 Future.delayed(Duration(milliseconds: 1000),(){
-                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                       LoginPage()), (Route<dynamic> route) => false);
-               //    Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginPage()));
-                 });
-
+                onTapAction: () async {
+                  await viewModel.removeUser();
+                  defaultShowDialog(
+                      context, ACCOUNT_DELETED_TEXT, Icons.delete, true);
+                  Future.delayed(Duration(milliseconds: 1000), () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        (Route<dynamic> route) => false);
+                    //    Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginPage()));
+                  });
                 },
               )
             ],

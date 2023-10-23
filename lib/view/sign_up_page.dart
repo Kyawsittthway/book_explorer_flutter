@@ -43,58 +43,65 @@ class SignUpPage extends StatelessWidget {
                         child: Lottie.asset(REGISTER_LOTTIE_IMG_PATH),
                       ),
                       ReusableTextFormField(
-                          controller: viewModel.nameController,
-                          hint: USER_NAME_TEXT,
+                        controller: viewModel.nameController,
+                        hint: USER_NAME_TEXT,
                         isPassword: false,
                       ),
-
                       SizedBox(
                         height: DEFAULT_PADDING,
                       ),
                       ReusableTextFormField(
-                          controller: viewModel.passwordController,
-                          hint: PASSWORDD_TEXT,
+                        controller: viewModel.passwordController,
+                        hint: PASSWORDD_TEXT,
                         isPassword: true,
                       ),
                       SizedBox(
                         height: DEFAULT_PADDING,
                       ),
                       ReusableTextFormField(
-                          controller: viewModel.confirmController,
-                          hint: CONFIRM_PASSWORD_TEXT,isPassword: true,),
+                        controller: viewModel.confirmController,
+                        hint: CONFIRM_PASSWORD_TEXT,
+                        isPassword: true,
+                      ),
                       SizedBox(
                         height: DEFAULT_PADDING,
                       ),
                       ReusableElevatedButton(
                           title: SIGN_UP_TEXT,
                           onPressAction: () async {
-                            if(viewModel.checkTextField()){
+                            if (viewModel.checkTextField()) {
                               if (viewModel.checkPassword() == true) {
                                 await viewModel.signUp();
                                 if (viewModel.personExist == true) {
                                   defaultShowDialog(
-                                      context,
+                                    context,
                                     USER_ALR_EXIST_TEXT,
-                                      Icons.error_outline,
-                                  true,);
+                                    Icons.error_outline,
+                                    true,
+                                  );
                                 } else {
-
-                                  defaultShowDialog(context, ACCOUNT_CREATED_TEXT, Icons.person,false);
+                                  defaultShowDialog(
+                                      context,
+                                      ACCOUNT_CREATED_TEXT,
+                                      Icons.person,
+                                      false);
                                   Future.delayed(Duration(milliseconds: 1000),
-                                          () {
-                                        viewModel.clearController();
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (_) => LoginPage()));
-                                      });
+                                      () {
+                                    viewModel.clearController();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => LoginPage()));
+                                  });
                                 }
                               } else {
-                                defaultShowDialog(context, PASSWORD_NOT_MATCH_TEXT,
-                                    Icons.warning,true);
+                                defaultShowDialog(
+                                    context,
+                                    PASSWORD_NOT_MATCH_TEXT,
+                                    Icons.warning,
+                                    true);
                               }
                             }
-
                           })
                     ],
                   ),

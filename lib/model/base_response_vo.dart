@@ -6,7 +6,8 @@ import 'dart:convert';
 
 import 'book_vo.dart';
 
-BaseResponseVO baseResponseVoFromJson(String str) => BaseResponseVO.fromJson(json.decode(str));
+BaseResponseVO baseResponseVoFromJson(String str) =>
+    BaseResponseVO.fromJson(json.decode(str));
 
 String baseResponseVoToJson(BaseResponseVO data) => json.encode(data.toJson());
 
@@ -22,17 +23,18 @@ class BaseResponseVO {
   });
 
   factory BaseResponseVO.fromJson(Map<String, dynamic> json) => BaseResponseVO(
-    status: json["status"],
-    total: json["total"],
-    books: json["books"] == null ? [] : List<BookVO>.from(json["books"]!.map((x) => BookVO.fromJson(x))),
-  );
+        status: json["status"],
+        total: json["total"],
+        books: json["books"] == null
+            ? []
+            : List<BookVO>.from(json["books"]!.map((x) => BookVO.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
-    "total": total,
-    "books": books == null ? [] : List<dynamic>.from(books!.map((x) => x.toJson())),
-  };
+        "status": status,
+        "total": total,
+        "books": books == null
+            ? []
+            : List<dynamic>.from(books!.map((x) => x.toJson())),
+      };
 }
-
-
-

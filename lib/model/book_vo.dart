@@ -9,6 +9,7 @@ import 'package:floor/floor.dart';
 BookVO bookVoFromJson(String str) => BookVO.fromJson(json.decode(str));
 
 String bookVoToJson(BookVO data) => json.encode(data.toJson());
+
 @entity
 class BookVO {
   @primaryKey
@@ -29,20 +30,20 @@ class BookVO {
   });
 
   factory BookVO.fromJson(Map<String, dynamic> json) => BookVO(
-    id: json["id"],
-    title: json["title"],
-    subtitle: json["subtitle"],
-    authors: json["authors"],
-    image: json["image"],
-    url: json["url"],
-  );
+        id: json["id"],
+        title: json["title"],
+        subtitle: json["subtitle"],
+        authors: json["authors"],
+        image: json["image"],
+        url: json["url"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "title": title,
-    "subtitle": subtitle,
-    "authors": authors,
-    "image": image,
-    "url": url,
-  };
+        "id": id,
+        "title": title,
+        "subtitle": subtitle,
+        "authors": authors,
+        "image": image,
+        "url": url,
+      };
 }

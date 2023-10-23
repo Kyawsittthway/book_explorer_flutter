@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
 
     return Stack(children: [
       WillPopScope(
-        onWillPop: ()async{
+        onWillPop: () async {
           return false;
         },
         child: Scaffold(
@@ -58,23 +58,22 @@ class LoginPage extends StatelessWidget {
                       height: DEFAULT_PADDING,
                     ),
                     ReusableElevatedButton(
-                        title:SIGN_IN_TEXT,
+                        title: SIGN_IN_TEXT,
                         onPressAction: () async {
                           await loginViewModel.login(context);
 
                           if (loginViewModel.isLoggedIn) {
-                            defaultShowDialog(context,LOGGING_IN_TEXT, Icons.login,false);
+                            defaultShowDialog(
+                                context, LOGGING_IN_TEXT, Icons.login, false);
                             Future.delayed(Duration(milliseconds: 800), () {
-
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => SearchResultPage()));
                             });
-
                           } else {
                             defaultShowDialog(
-                                context, NO_USER_FOUND_TEXT, Icons.error,true);
+                                context, NO_USER_FOUND_TEXT, Icons.error, true);
                           }
                         }),
                     SizedBox(

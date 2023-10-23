@@ -21,10 +21,13 @@ class SignUpViewModel extends ChangeNotifier {
   bool checkPassword() {
     return passwordController.text == confirmController.text ? true : false;
   }
-  bool checkTextField(){
-    if(nameController.text.isEmpty || passwordController.text.isEmpty || confirmController.text.isEmpty){
+
+  bool checkTextField() {
+    if (nameController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        confirmController.text.isEmpty) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
@@ -56,7 +59,8 @@ class SignUpViewModel extends ChangeNotifier {
     _personExist = value;
     notifyListeners();
   }
-  void clearController(){
+
+  void clearController() {
     nameController.clear();
     passwordController.clear();
     confirmController.clear();
