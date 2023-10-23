@@ -98,6 +98,10 @@ class SearchResultPage extends StatelessWidget {
                   imgPath: viewModel.bookList[index].image,
                   bookName: viewModel.bookList[index].title,
                   authors: viewModel.bookList[index].authors,
+                  isFav: viewModel.checkIsFav(viewModel.bookList[index]),
+                  onPressedAction: ()async{
+                    await viewModel.favButtonAction(viewModel.bookList[index]);
+                  },
                 ),
               ),
             ),

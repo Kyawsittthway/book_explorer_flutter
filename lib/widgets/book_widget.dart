@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class BookWidget extends StatelessWidget {
   String bookName;
   String authors;
+  bool isFav;
   String imgPath;
-   BookWidget({Key? key,required this.bookName,required this.authors,required this.imgPath}) : super(key: key);
+  Function onPressedAction;
+   BookWidget({Key? key,required this.bookName,required this.isFav,required this.authors,required this.imgPath,required this.onPressedAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +28,10 @@ class BookWidget extends StatelessWidget {
                 top: 10,
 
                 child: IconButton(
-                  icon: Icon(Icons.favorite,size: 30,),
-                  onPressed: (){},
+                  icon: Icon(Icons.favorite,size: 30,color: isFav? Colors.red:Colors.black,),
+                  onPressed: (){
+                    onPressedAction();
+                  },
                 ),
               )
       ]

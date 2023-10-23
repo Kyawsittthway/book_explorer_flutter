@@ -63,6 +63,8 @@ class _$AppDatabase extends AppDatabase {
 
   UserDao? _userDaoInstance;
 
+  BookDao? _bookDaoInstance;
+
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback? callback]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
@@ -83,6 +85,8 @@ class _$AppDatabase extends AppDatabase {
       onCreate: (database, version) async {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `UserVO` (`id` INTEGER, `name` TEXT NOT NULL, `password` TEXT NOT NULL, PRIMARY KEY (`id`))');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `BookVO` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `subtitle` TEXT NOT NULL, `authors` TEXT NOT NULL, `image` TEXT NOT NULL, `url` TEXT NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -93,6 +97,11 @@ class _$AppDatabase extends AppDatabase {
   @override
   UserDao get userDao {
     return _userDaoInstance ??= _$UserDao(database, changeListener);
+  }
+
+  @override
+  BookDao get bookDao {
+    return _bookDaoInstance ??= _$BookDao(database, changeListener);
   }
 }
 
@@ -152,5 +161,65 @@ class _$UserDao extends UserDao {
   @override
   Future<void> deletePerson(UserVO user) async {
     await _userVODeletionAdapter.delete(user);
+  }
+}
+
+class _$BookDao extends BookDao {
+  _$BookDao(this.database, this.changeListener)
+      : _queryAdapter = QueryAdapter(database),
+        _bookVOInsertionAdapter = InsertionAdapter(
+            database,
+            'BookVO',
+            (BookVO item) => <String, Object?>{
+                  'id': item.id,
+                  'title': item.title,
+                  'subtitle': item.subtitle,
+                  'authors': item.authors,
+                  'image': item.image,
+                  'url': item.url
+                }),
+        _bookVODeletionAdapter = DeletionAdapter(
+            database,
+            'BookVO',
+            ['id'],
+            (BookVO item) => <String, Object?>{
+                  'id': item.id,
+                  'title': item.title,
+                  'subtitle': item.subtitle,
+                  'authors': item.authors,
+                  'image': item.image,
+                  'url': item.url
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<BookVO> _bookVOInsertionAdapter;
+
+  final DeletionAdapter<BookVO> _bookVODeletionAdapter;
+
+  @override
+  Future<List<BookVO>> findAllFavouriteBook() async {
+    return _queryAdapter.queryList('SELECT * FROM BookVO',
+        mapper: (Map<String, Object?> row) => BookVO(
+            id: row['id'] as String,
+            title: row['title'] as String,
+            subtitle: row['subtitle'] as String,
+            authors: row['authors'] as String,
+            image: row['image'] as String,
+            url: row['url'] as String));
+  }
+
+  @override
+  Future<void> insertFavBook(BookVO book) async {
+    await _bookVOInsertionAdapter.insert(book, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> removeFavBook(BookVO book) async {
+    await _bookVODeletionAdapter.delete(book);
   }
 }
