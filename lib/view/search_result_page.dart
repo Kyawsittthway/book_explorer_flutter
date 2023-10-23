@@ -37,6 +37,7 @@ class SearchResultPage extends StatelessWidget {
                   icon: Icon(Icons.favorite)),
               IconButton(
                   onPressed: () {
+                    searchResultViewModel.clearUp();
                     Navigator.push(
                         context, MaterialPageRoute(builder: (_) => SettingPage()));
                   },
@@ -103,11 +104,11 @@ class SearchResultPage extends StatelessWidget {
             height: DEFAULT_PADDING,
           ),
           Container(
-            child: ListView.builder(
+            child: viewModel.bookList.isEmpty ? Container():ListView.builder(
               shrinkWrap: true,
               primary: false,
               // physics: NeverScrollableScrollPhysics(),
-              itemCount: viewModel.chunkedList.length,
+              itemCount: viewModel.chunkedList.isEmpty ? 0:viewModel.chunkedList.length,
               itemBuilder: (context, index) => Container(
                 child: BookWidget(
                   imgPath: viewModel.bookList[index].image,

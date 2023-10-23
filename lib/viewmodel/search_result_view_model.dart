@@ -25,7 +25,6 @@ class SearchResultViewModel extends ChangeNotifier {
     bookList.clear();
     searchController.clear();
     setFavouriteBookList();
-
   }
 
   ///Getters
@@ -38,16 +37,19 @@ class SearchResultViewModel extends ChangeNotifier {
     _loading = loading;
     notifyListeners();
   }
-  setLoadingNewData(bool loading)async{
+
+  setLoadingNewData(bool loading) async {
     loadingNewData = loading;
     notifyListeners();
   }
+
   setShowTotal(bool showTotal) async {
     _showTotal = showTotal;
     notifyListeners();
   }
 
   setBookList(List<BookVO> bookList) {
+
     _bookList = bookList;
     print(_bookList);
     if (!bookList.isEmpty) {
@@ -65,8 +67,7 @@ class SearchResultViewModel extends ChangeNotifier {
   }
 
   void fetchChunkData() {
-    if(bookList.isNotEmpty)
-    if (bookList.length <= 10) {
+    if (bookList.isNotEmpty) if (bookList.length <= 10) {
       chunkedList.addAll(bookList);
       hideSeeMore = true;
     } else {
@@ -97,15 +98,13 @@ class SearchResultViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void loadMoreData() async{
+  void loadMoreData() async {
     setLoadingNewData(true);
-    Future.delayed(Duration(milliseconds: 800),(){
+    Future.delayed(Duration(milliseconds: 800), () {
       currentPage++;
       fetchChunkData();
       setLoadingNewData(false);
     });
-
-
   }
 
   getBooks(String bookName) async {
@@ -144,6 +143,14 @@ class SearchResultViewModel extends ChangeNotifier {
   bool checkIsFav(BookVO book) {
     var contain = _favBookList.where((element) => element.id == book.id);
     return contain.isEmpty ? false : true;
+  }
+
+  void clearUp(){
+    searchController.clear();
+    bookList.clear();
+    hideSeeMore = true;
+    setShowTotal(false);
+    notifyListeners();
   }
 
   favButtonAction(BookVO book) async {
