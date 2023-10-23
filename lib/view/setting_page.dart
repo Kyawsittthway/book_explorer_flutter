@@ -54,7 +54,7 @@ class SettingPage extends StatelessWidget {
                 ),
                 onTapAction: ()async {
                  await viewModel.removeUser();
-                 defaultShowDialog(context, "Account Deleted!", Icons.delete);
+                 defaultShowDialog(context, "Account Deleted!", Icons.delete,true);
                  Future.delayed(Duration(milliseconds: 1000),(){
 
                    Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginPage()));

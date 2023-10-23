@@ -67,10 +67,11 @@ class SignUpPage extends StatelessWidget {
                                   defaultShowDialog(
                                       context,
                                       "User already existed",
-                                      Icons.error_outline);
+                                      Icons.error_outline,
+                                  true,);
                                 } else {
 
-                                  defaultShowDialog(context, "Account Created!", Icons.person);
+                                  defaultShowDialog(context, "Account Created!", Icons.person,false);
                                   Future.delayed(Duration(milliseconds: 1000),
                                           () {
                                         viewModel.clearController();
@@ -82,7 +83,7 @@ class SignUpPage extends StatelessWidget {
                                 }
                               } else {
                                 defaultShowDialog(context, "Passwords not match",
-                                    Icons.warning);
+                                    Icons.warning,true);
                               }
                             }
 

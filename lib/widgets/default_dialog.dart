@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void defaultShowDialog(BuildContext context,String status,IconData icon) {
+void defaultShowDialog(BuildContext context,String status,IconData icon,bool warning) {
   showDialog(
       context: context,
       builder: (context) => Center(
@@ -18,11 +18,11 @@ void defaultShowDialog(BuildContext context,String status,IconData icon) {
                     Icon(
                       icon,
                       size: 40,
-                      color: Colors.red,
+                      color: warning ? Colors.red : Colors.black,
                     ),
                     DefaultTextStyle(
                       style: TextStyle(
-                        color: Colors.red,
+                        color: warning ? Colors.red: Colors.black,
                         fontSize: 20,
                       ),
                       child: Text(status),

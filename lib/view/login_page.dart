@@ -54,16 +54,18 @@ class LoginPage extends StatelessWidget {
                         await loginViewModel.login(context);
 
                         if (loginViewModel.isLoggedIn) {
+                          defaultShowDialog(context, "Logging in", Icons.login,false);
                           Future.delayed(Duration(milliseconds: 800), () {
+
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => SearchResultPage()));
-
                           });
+
                         } else {
                           defaultShowDialog(
-                              context, "No User Found!", Icons.error);
+                              context, "No User Found!", Icons.error,true);
                         }
                       }),
                   SizedBox(

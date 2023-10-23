@@ -15,6 +15,7 @@ class SearchResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SearchResultViewModel searchResultViewModel =
         context.watch<SearchResultViewModel>();
+    searchResultViewModel.setFavouriteBookList();
     return Scaffold(
       appBar: AppBar(
         title: Text("Result"),
@@ -23,6 +24,8 @@ class SearchResultPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
+               // searchResultViewModel.clearBookList();
+                searchResultViewModel.searchController.clear();
                 Navigator.push(context,
                     MaterialPageRoute(builder: (_) => FavouritePage()));
               },

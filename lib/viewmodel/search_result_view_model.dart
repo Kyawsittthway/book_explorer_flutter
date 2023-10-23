@@ -39,6 +39,10 @@ class SearchResultViewModel extends ChangeNotifier {
     print(_bookList);
     notifyListeners();
   }
+  clearBookList(){
+    _bookList.clear();
+    notifyListeners();
+  }
 
   getBooks(String bookName) async {
     if (bookName.isNotEmpty) {
@@ -70,10 +74,12 @@ class SearchResultViewModel extends ChangeNotifier {
     _favBookList = await bookDao.findAllFavouriteBook();
     notifyListeners();
   }
-  bool checkIsFav(BookVO book){
+
+  bool checkIsFav(BookVO book) {
     var contain = _favBookList.where((element) => element.id == book.id);
     return contain.isEmpty ? false : true;
   }
+
   favButtonAction(BookVO book) async {
     var contain = _favBookList.where((element) => element.id == book.id);
     if (contain.isNotEmpty) {
