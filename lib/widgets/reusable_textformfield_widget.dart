@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../resources/dimen.dart';
+
 class ReusableTextFormField extends StatelessWidget {
   TextEditingController controller;
   String hint;
@@ -13,7 +15,7 @@ class ReusableTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.85,
-      height: 45,
+      height: TEXT_FIELD_HEIGHT,
       child: TextFormField(
         controller: controller,
         obscureText: isPassword? true:false,

@@ -5,6 +5,9 @@ import 'package:book_explorer/widgets/setting_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../resources/dimen.dart';
+import '../resources/strings.dart';
+
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
 
@@ -15,7 +18,7 @@ class SettingPage extends StatelessWidget {
       Scaffold(
         backgroundColor: Colors.grey.shade300,
         appBar: AppBar(
-          title: Text("Setting Page"),
+          title: Text(SETTING_TITLE),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
@@ -24,14 +27,14 @@ class SettingPage extends StatelessWidget {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          padding: EdgeInsets.symmetric(vertical: PADDING_20X, horizontal: PADDING_10X),
           child: Column(
             children: [
               SettingItemWidget(
-                title: "Log Out",
+                title: LOG_OUT_TEXT,
                 icon: Icon(
                   Icons.logout,
-                  size: 30,
+                  size: DEFAULT_ICON_SIZE,
                 ),
                 onTapAction: () async {
                   await viewModel.logOut();
@@ -44,17 +47,17 @@ class SettingPage extends StatelessWidget {
                 },
               ),
               SizedBox(
-                height: 20,
+                height: DEFAULT_PADDING,
               ),
               SettingItemWidget(
-                title: "Delete Account",
+                title: DELETE_ACCOUN_TEXT,
                 icon: Icon(
                   Icons.remove_circle,
-                  size: 30,
+                  size: DEFAULT_ICON_SIZE,
                 ),
                 onTapAction: ()async {
                  await viewModel.removeUser();
-                 defaultShowDialog(context, "Account Deleted!", Icons.delete,true);
+                 defaultShowDialog(context, ACCOUNT_DELETED_TEXT, Icons.delete,true);
                  Future.delayed(Duration(milliseconds: 1000),(){
 
                    Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginPage()));

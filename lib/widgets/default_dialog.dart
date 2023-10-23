@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../resources/dimen.dart';
+
 void defaultShowDialog(BuildContext context,String status,IconData icon,bool warning) {
   showDialog(
       context: context,
@@ -7,17 +9,17 @@ void defaultShowDialog(BuildContext context,String status,IconData icon,bool war
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(NORMAL_BORDER_RADIUS),
           ),
-          height: 120,
-          width: 300,
+          height: DIALOG_HEIGHT,
+          width: DIALOG_WIDTH,
           child: Center(
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
                       icon,
-                      size: 40,
+                      size: MEDIUM_ICON_SIZE,
                       color: warning ? Colors.red : Colors.black,
                     ),
                     DefaultTextStyle(

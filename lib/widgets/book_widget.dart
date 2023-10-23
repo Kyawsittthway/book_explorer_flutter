@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../resources/dimen.dart';
+
 class BookWidget extends StatelessWidget {
   String bookName;
   String authors;
@@ -11,24 +13,24 @@ class BookWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: PADDING_10X,horizontal: PADDING_10X),
       child: Row(
     crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [Container(
 
-              height: 180,
-              width: 130,
+              height: BOOK_IMAGE_HEIGHT,
+              width: BOOK_IMAGE_WIDTH,
               child: Image.network(
                   imgPath,fit: BoxFit.fill,),
             ),
               Positioned(
-                left: 85,
-                top: 10,
+                left: BOOK_LEFT_POSITION,
+                top: BOOK_TOP_POSITION,
 
                 child: IconButton(
-                  icon: Icon(Icons.favorite,size: 30,color: isFav? Colors.red:Colors.black,),
+                  icon: Icon(Icons.favorite,size: DEFAULT_ICON_SIZE,color: isFav? Colors.red:Colors.black,),
                   onPressed: (){
                     onPressedAction();
                   },
@@ -36,7 +38,7 @@ class BookWidget extends StatelessWidget {
               )
       ]
           ),
-          SizedBox(width: 20,),
+          SizedBox(width: DEFAULT_PADDING,),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -52,7 +54,7 @@ class BookWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: DEFAULT_PADDING,),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Text(authors,maxLines:2,style: TextStyle(

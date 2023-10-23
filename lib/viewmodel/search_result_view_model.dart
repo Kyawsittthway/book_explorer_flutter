@@ -87,7 +87,7 @@ class SearchResultViewModel extends ChangeNotifier {
               image:
                   _bookList[(index + 1) + (currentPage - 1) * _pageSize].image,
               url: bookList[(index + 1) + (currentPage - 1) * _pageSize].url));
-      print("Data are :: ${data.map((e) => e.title)}");
+      //print("Data are :: ${data.map((e) => e.title)}");
       chunkedList.addAll(data);
     }
     notifyListeners();

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import '../resources/dimen.dart';
+import '../resources/strings.dart';
 import '../widgets/reusable_elevated_button_widget.dart';
 import '../widgets/reusable_textformfield_widget.dart';
 import '../widgets/default_dialog.dart';
@@ -24,7 +26,7 @@ class LoginPage extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Text("Book Explorer"),
+            title: Text(PAGE_TITLE),
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -35,33 +37,33 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 300,
-                      height: 200,
-                      child: Lottie.asset("assets/images/login.json"),
+                      width: LOGIN_LOTTIE_HEIGHT,
+                      height: LOGIN_LOTTIE_WIDTH,
+                      child: Lottie.asset(LOGIN_LOTTIE_IMG_PATH),
                     ),
                     ReusableTextFormField(
                       controller: loginViewModel.nameController,
-                      hint: "User Name",
+                      hint: USER_NAME_TEXT,
                       isPassword: false,
                     ),
                     SizedBox(
-                      height: 20,
+                      height: DEFAULT_PADDING,
                     ),
                     ReusableTextFormField(
                       controller: loginViewModel.passwordController,
-                      hint: "Password",
+                      hint: PASSWORDD_TEXT,
                       isPassword: true,
                     ),
                     SizedBox(
-                      height: 20,
+                      height: DEFAULT_PADDING,
                     ),
                     ReusableElevatedButton(
-                        title: "Sign In",
+                        title:SIGN_IN_TEXT,
                         onPressAction: () async {
                           await loginViewModel.login(context);
 
                           if (loginViewModel.isLoggedIn) {
-                            defaultShowDialog(context, "Logging in", Icons.login,false);
+                            defaultShowDialog(context,LOGGING_IN_TEXT, Icons.login,false);
                             Future.delayed(Duration(milliseconds: 800), () {
 
                               Navigator.push(
@@ -72,11 +74,11 @@ class LoginPage extends StatelessWidget {
 
                           } else {
                             defaultShowDialog(
-                                context, "No User Found!", Icons.error,true);
+                                context, NO_USER_FOUND_TEXT, Icons.error,true);
                           }
                         }),
                     SizedBox(
-                      height: 20,
+                      height: DEFAULT_PADDING,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -84,7 +86,7 @@ class LoginPage extends StatelessWidget {
                             MaterialPageRoute(builder: (_) => SignUpPage()));
                       },
                       child: Text(
-                        "Sign Up",
+                        SIGN_UP_TEXT,
                         style: TextStyle(
                           color: Colors.blue,
                           decoration: TextDecoration.underline,

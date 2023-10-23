@@ -1,3 +1,4 @@
+import 'package:book_explorer/resources/dimen.dart';
 import 'package:flutter/material.dart';
 
 class SettingItemWidget extends StatelessWidget {
@@ -17,20 +18,20 @@ class SettingItemWidget extends StatelessWidget {
     return GestureDetector(
       child: Container(
 
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: DEFAULT_PADDING),
 
         decoration: BoxDecoration(
             color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(NORMAL_BORDER_RADIUS),
         ),
-        height: 80,
+        height: SETTING_ITEM_HEIGHT,
         width: MediaQuery.of(context).size.width,
         child: Row(
 
           children: [
             icon,
             SizedBox(
-              width: 40,
+              width: PADDING_40X,
             ),
             Text(title),
           ],

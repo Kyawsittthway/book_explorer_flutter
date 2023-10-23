@@ -5,6 +5,8 @@ import 'package:book_explorer/widgets/book_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../resources/dimen.dart';
+import '../resources/strings.dart';
 import '../widgets/reusable_elevated_button_widget.dart';
 import '../widgets/reusable_textformfield_widget.dart';
 
@@ -23,7 +25,7 @@ class SearchResultPage extends StatelessWidget {
       },
       child: Scaffold(
           appBar: AppBar(
-            title: Text("Result"),
+            title: Text(RESULT_TITLE),
             centerTitle: true,
             leading: Container(),
             actions: [
@@ -45,25 +47,25 @@ class SearchResultPage extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 20,
+                  height: DEFAULT_PADDING,
                 ),
                 ReusableTextFormField(
                   controller: searchResultViewModel.searchController,
-                  hint: "Book names,authors",
+                  hint: SEARCH_BOX_HINT,
                   prefixIcon: Icon(Icons.search),
                   isPassword: false,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: DEFAULT_PADDING,
                 ),
                 ReusableElevatedButton(
-                    title: "Search",
+                    title: SEARCH_TEXT,
                     onPressAction: () {
                       searchResultViewModel.clearBookList();
                       searchResultViewModel
                           .getBooks(searchResultViewModel.searchController.text);
                     }),
-                SizedBox(height: 20,),
+                SizedBox(height: DEFAULT_PADDING,),
                 pageView(searchResultViewModel),
               ],
             ),
@@ -83,7 +85,7 @@ class SearchResultPage extends StatelessWidget {
       return Column(
         children: [
           SizedBox(
-            height: 20,
+            height: DEFAULT_PADDING,
           ),
           Container(
             child: Visibility(
@@ -98,7 +100,7 @@ class SearchResultPage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: DEFAULT_PADDING,
           ),
           Container(
             child: ListView.builder(
@@ -123,12 +125,12 @@ class SearchResultPage extends StatelessWidget {
           Visibility(
             visible: !viewModel.hideSeeMore,
             child: Container(
-              margin: EdgeInsets.only(bottom: 35),
+              margin: EdgeInsets.only(bottom: SMALL_PADDING),
               child: viewModel.loadingNewData? CircularProgressIndicator():ElevatedButton(
                 onPressed:(){
                    viewModel.loadMoreData();
                 },
-                child: const Text('See More'),
+                child: const Text(SEE_MORE_TEXT),
               ),
             ),
           )

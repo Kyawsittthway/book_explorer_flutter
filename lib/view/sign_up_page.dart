@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import '../resources/dimen.dart';
+import '../resources/strings.dart';
+
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
@@ -19,7 +22,7 @@ class SignUpPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: Text(SIGN_UP_TEXT),
       ),
       body: SingleChildScrollView(
         child: viewModel.loading == true
@@ -35,35 +38,35 @@ class SignUpPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        width: 300,
-                        height: 300,
-                        child: Lottie.asset("assets/images/register.json"),
+                        width: REGISTER_LOTTIE_WIDTH,
+                        height: REGISTER_LOTTIE_HEIGHT,
+                        child: Lottie.asset(REGISTER_LOTTIE_IMG_PATH),
                       ),
                       ReusableTextFormField(
                           controller: viewModel.nameController,
-                          hint: "User Name",
+                          hint: USER_NAME_TEXT,
                         isPassword: false,
                       ),
 
                       SizedBox(
-                        height: 20,
+                        height: DEFAULT_PADDING,
                       ),
                       ReusableTextFormField(
                           controller: viewModel.passwordController,
-                          hint: "Password",
+                          hint: PASSWORDD_TEXT,
                         isPassword: true,
                       ),
                       SizedBox(
-                        height: 20,
+                        height: DEFAULT_PADDING,
                       ),
                       ReusableTextFormField(
                           controller: viewModel.confirmController,
-                          hint: "Confirm Password",isPassword: true,),
+                          hint: CONFIRM_PASSWORD_TEXT,isPassword: true,),
                       SizedBox(
-                        height: 20,
+                        height: DEFAULT_PADDING,
                       ),
                       ReusableElevatedButton(
-                          title: "Sign Up",
+                          title: SIGN_UP_TEXT,
                           onPressAction: () async {
                             if(viewModel.checkTextField()){
                               if (viewModel.checkPassword() == true) {
@@ -71,12 +74,12 @@ class SignUpPage extends StatelessWidget {
                                 if (viewModel.personExist == true) {
                                   defaultShowDialog(
                                       context,
-                                      "User already existed",
+                                    USER_ALR_EXIST_TEXT,
                                       Icons.error_outline,
                                   true,);
                                 } else {
 
-                                  defaultShowDialog(context, "Account Created!", Icons.person,false);
+                                  defaultShowDialog(context, ACCOUNT_CREATED_TEXT, Icons.person,false);
                                   Future.delayed(Duration(milliseconds: 1000),
                                           () {
                                         viewModel.clearController();
@@ -87,7 +90,7 @@ class SignUpPage extends StatelessWidget {
                                       });
                                 }
                               } else {
-                                defaultShowDialog(context, "Passwords not match",
+                                defaultShowDialog(context, PASSWORD_NOT_MATCH_TEXT,
                                     Icons.warning,true);
                               }
                             }

@@ -4,6 +4,8 @@ import 'package:book_explorer/widgets/book_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../resources/strings.dart';
+
 class FavouritePage extends StatelessWidget {
   const FavouritePage({Key? key}) : super(key: key);
 
@@ -13,7 +15,7 @@ class FavouritePage extends StatelessWidget {
     viewModel.setFavList();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Favourite Page"),
+        title: Text(FAVOURITE_TITLE),
         // leading: IconButton(icon: Icon(Icons.arrow_back_ios),onPressed: (){
         //   Navigator.push(context, MaterialPageRoute(builder: (_)=>SearchResultPage()));
         // },),
