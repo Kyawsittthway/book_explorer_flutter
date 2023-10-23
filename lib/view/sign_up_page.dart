@@ -1,4 +1,7 @@
+import 'package:book_explorer/view/login_page.dart';
+import 'package:book_explorer/view/search_result_page.dart';
 import 'package:book_explorer/viewmodel/sign_up_view_model.dart';
+import 'package:book_explorer/widgets/default_dialog.dart';
 import 'package:book_explorer/widgets/reusable_elevated_button_widget.dart';
 import 'package:book_explorer/widgets/reusable_textformfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -56,8 +59,33 @@ class SignUpPage extends StatelessWidget {
                       ),
                       ReusableElevatedButton(
                           title: "Sign Up",
-                          onPressAction: () {
-                            viewModel.signUp();
+                          onPressAction: () async {
+                            if(viewModel.checkTextField()){
+                              if (viewModel.checkPassword() == true) {
+                                await viewModel.signUp();
+                                if (viewModel.personExist == true) {
+                                  defaultShowDialog(
+                                      context,
+                                      "User already existed",
+                                      Icons.error_outline);
+                                } else {
+
+                                  defaultShowDialog(context, "Account Created!", Icons.person);
+                                  Future.delayed(Duration(milliseconds: 1000),
+                                          () {
+                                        viewModel.clearController();
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => LoginPage()));
+                                      });
+                                }
+                              } else {
+                                defaultShowDialog(context, "Passwords not match",
+                                    Icons.warning);
+                              }
+                            }
+
                           })
                     ],
                   ),

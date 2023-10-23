@@ -128,6 +128,13 @@ class _$UserDao extends UserDao {
   final DeletionAdapter<UserVO> _userVODeletionAdapter;
 
   @override
+  Future<List<UserVO>> findAllUsers() async {
+    return _queryAdapter.queryList('SELECT * FROM UserVO',
+        mapper: (Map<String, Object?> row) => UserVO(row['id'] as int?,
+            row['name'] as String, row['password'] as String));
+  }
+
+  @override
   Future<UserVO?> findUserByNameAndPassword(
       String name, String password) async {
     return _queryAdapter.query(

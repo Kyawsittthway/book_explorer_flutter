@@ -4,11 +4,14 @@
 
 import 'dart:convert';
 
+import 'package:floor/floor.dart';
+
 BookVO bookVoFromJson(String str) => BookVO.fromJson(json.decode(str));
 
 String bookVoToJson(BookVO data) => json.encode(data.toJson());
-
+@entity
 class BookVO {
+  @primaryKey
   String id;
   String title;
   String subtitle;

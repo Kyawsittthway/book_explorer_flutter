@@ -52,12 +52,14 @@ class LoginPage extends StatelessWidget {
                       title: "Sign In",
                       onPressAction: () async {
                         await loginViewModel.login(context);
+
                         if (loginViewModel.isLoggedIn) {
                           Future.delayed(Duration(milliseconds: 800), () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => SearchResultPage()));
+
                           });
                         } else {
                           defaultShowDialog(
