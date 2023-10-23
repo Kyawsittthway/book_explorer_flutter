@@ -23,6 +23,7 @@ void main() async{
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final int? currentId = prefs.getInt("loginUserId");
   runApp( MyApp(userDao: userDao,bookDao:bookDao,currentId: currentId,));
+
 }
 
 class MyApp extends StatelessWidget {

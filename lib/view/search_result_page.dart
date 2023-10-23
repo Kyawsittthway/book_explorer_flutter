@@ -16,52 +16,61 @@ class SearchResultPage extends StatelessWidget {
     SearchResultViewModel searchResultViewModel =
         context.watch<SearchResultViewModel>();
     searchResultViewModel.setFavouriteBookList();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Result"),
-        centerTitle: true,
-        leading: Container(),
-        actions: [
-          IconButton(
-              onPressed: () {
-               // searchResultViewModel.clearBookList();
-                searchResultViewModel.searchController.clear();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => FavouritePage()));
-              },
-              icon: Icon(Icons.favorite)),
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => SettingPage()));
-              },
-              icon: Icon(Icons.menu))
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
+
+    return WillPopScope(
+      onWillPop: ()async{
+        return false;
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text("Result"),
+            centerTitle: true,
+            leading: Container(),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => FavouritePage()));
+                  },
+                  icon: Icon(Icons.favorite)),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => SettingPage()));
+                  },
+                  icon: Icon(Icons.menu))
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                ReusableTextFormField(
+                  controller: searchResultViewModel.searchController,
+                  hint: "Book names,authors",
+                  prefixIcon: Icon(Icons.search),
+                  isPassword: false,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ReusableElevatedButton(
+                    title: "Search",
+                    onPressAction: () {
+                      searchResultViewModel.clearBookList();
+                      searchResultViewModel
+                          .getBooks(searchResultViewModel.searchController.text);
+                    }),
+                SizedBox(height: 20,),
+                pageView(searchResultViewModel),
+              ],
             ),
-            ReusableTextFormField(
-              controller: searchResultViewModel.searchController,
-              hint: "Book names,authors",
-              prefixIcon: Icon(Icons.search),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ReusableElevatedButton(
-                title: "Search",
-                onPressAction: () {
-                  searchResultViewModel
-                      .getBooks(searchResultViewModel.searchController.text);
-                }),
-            pageView(searchResultViewModel),
-          ],
+          ),
         ),
-      ),
+
+
     );
   }
 
@@ -94,8 +103,9 @@ class SearchResultPage extends StatelessWidget {
           Container(
             child: ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: viewModel.bookList.length,
+              primary: false,
+              // physics: NeverScrollableScrollPhysics(),
+              itemCount: viewModel.chunkedList.length,
               itemBuilder: (context, index) => Container(
                 child: BookWidget(
                   imgPath: viewModel.bookList[index].image,
@@ -107,8 +117,21 @@ class SearchResultPage extends StatelessWidget {
                   },
                 ),
               ),
+
             ),
           ),
+          Visibility(
+            visible: !viewModel.hideSeeMore,
+            child: Container(
+              margin: EdgeInsets.only(bottom: 35),
+              child: viewModel.loadingNewData? CircularProgressIndicator():ElevatedButton(
+                onPressed:(){
+                   viewModel.loadMoreData();
+                },
+                child: const Text('See More'),
+              ),
+            ),
+          )
         ],
       );
     }

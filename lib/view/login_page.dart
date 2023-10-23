@@ -17,74 +17,82 @@ class LoginPage extends StatelessWidget {
     LoginViewModel loginViewModel = context.watch<LoginViewModel>();
 
     return Stack(children: [
-      Scaffold(
-        appBar: AppBar(
-          title: Text("Book Explorer"),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.75,
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 300,
-                    height: 200,
-                    child: Lottie.asset("assets/images/login.json"),
-                  ),
-                  ReusableTextFormField(
-                    controller: loginViewModel.nameController,
-                    hint: "User Name",
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ReusableTextFormField(
-                    controller: loginViewModel.passwordController,
-                    hint: "Password",
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ReusableElevatedButton(
-                      title: "Sign In",
-                      onPressAction: () async {
-                        await loginViewModel.login(context);
-
-                        if (loginViewModel.isLoggedIn) {
-                          defaultShowDialog(context, "Logging in", Icons.login,false);
-                          Future.delayed(Duration(milliseconds: 800), () {
-
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => SearchResultPage()));
-                          });
-
-                        } else {
-                          defaultShowDialog(
-                              context, "No User Found!", Icons.error,true);
-                        }
-                      }),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => SignUpPage()));
-                    },
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline,
-                      ),
+      WillPopScope(
+        onWillPop: ()async{
+          return false;
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text("Book Explorer"),
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.75,
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 300,
+                      height: 200,
+                      child: Lottie.asset("assets/images/login.json"),
                     ),
-                  )
-                ],
+                    ReusableTextFormField(
+                      controller: loginViewModel.nameController,
+                      hint: "User Name",
+                      isPassword: false,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ReusableTextFormField(
+                      controller: loginViewModel.passwordController,
+                      hint: "Password",
+                      isPassword: true,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ReusableElevatedButton(
+                        title: "Sign In",
+                        onPressAction: () async {
+                          await loginViewModel.login(context);
+
+                          if (loginViewModel.isLoggedIn) {
+                            defaultShowDialog(context, "Logging in", Icons.login,false);
+                            Future.delayed(Duration(milliseconds: 800), () {
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => SearchResultPage()));
+                            });
+
+                          } else {
+                            defaultShowDialog(
+                                context, "No User Found!", Icons.error,true);
+                          }
+                        }),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => SignUpPage()));
+                      },
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

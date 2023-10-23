@@ -9,10 +9,16 @@ import '../model/book_vo.dart';
 class SearchResultViewModel extends ChangeNotifier {
   bool _loading = false;
   bool _showTotal = false;
+  bool hideSeeMore = true;
+  bool loadingNewData = false;
   List<BookVO> _bookList = [];
+  List<BookVO> chunkedList = [];
   List<BookVO> _favBookList = [];
   TextEditingController searchController = TextEditingController();
 
+  /// Test
+  int _pageSize = 10;
+  int currentPage = 1;
   BookDao bookDao;
   SearchResultViewModel(this.bookDao) {
     setFavouriteBookList();
@@ -28,7 +34,10 @@ class SearchResultViewModel extends ChangeNotifier {
     _loading = loading;
     notifyListeners();
   }
-
+  setLoadingNewData(bool loading)async{
+    loadingNewData = loading;
+    notifyListeners();
+  }
   setShowTotal(bool showTotal) async {
     _showTotal = showTotal;
     notifyListeners();
@@ -37,14 +46,67 @@ class SearchResultViewModel extends ChangeNotifier {
   setBookList(List<BookVO> bookList) {
     _bookList = bookList;
     print(_bookList);
+    if (!bookList.isEmpty) {
+      fetchChunkData();
+    } else {
+      hideSeeMore = true;
+    }
+
     notifyListeners();
   }
-  clearBookList(){
+
+  clearBookList() {
     _bookList.clear();
     notifyListeners();
   }
 
+  void fetchChunkData() {
+
+    if (bookList.length <= 10) {
+      chunkedList.addAll(bookList);
+      hideSeeMore = true;
+    } else {
+      int remainIndex = bookList.length - chunkedList.length;
+      //print("Reamin index :: $remainIndex");
+      hideSeeMore = false;
+      if (remainIndex < 10) {
+        _pageSize = remainIndex;
+        hideSeeMore = true;
+      }
+
+      final data = List<BookVO>.generate(
+          _pageSize,
+          (index) => BookVO(
+              id: _bookList[(index + 1) + (currentPage - 1) * _pageSize].id,
+              title:
+                  _bookList[(index + 1) + (currentPage - 1) * _pageSize].title,
+              subtitle: _bookList[(index + 1) + (currentPage - 1) * _pageSize]
+                  .subtitle,
+              authors: _bookList[(index + 1) + (currentPage - 1) * _pageSize]
+                  .authors,
+              image:
+                  _bookList[(index + 1) + (currentPage - 1) * _pageSize].image,
+              url: bookList[(index + 1) + (currentPage - 1) * _pageSize].url));
+      print("Data are :: ${data.map((e) => e.title)}");
+      chunkedList.addAll(data);
+    }
+    notifyListeners();
+  }
+
+  void loadMoreData() async{
+    setLoadingNewData(true);
+    Future.delayed(Duration(milliseconds: 800),(){
+      currentPage++;
+      fetchChunkData();
+      setLoadingNewData(false);
+    });
+
+
+  }
+
   getBooks(String bookName) async {
+    chunkedList.clear();
+    currentPage = 1;
     if (bookName.isNotEmpty) {
       setLoading(true);
       var response = await BookService.getBooks(bookName);

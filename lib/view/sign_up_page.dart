@@ -41,19 +41,24 @@ class SignUpPage extends StatelessWidget {
                       ),
                       ReusableTextFormField(
                           controller: viewModel.nameController,
-                          hint: "User Name"),
+                          hint: "User Name",
+                        isPassword: false,
+                      ),
+
                       SizedBox(
                         height: 20,
                       ),
                       ReusableTextFormField(
                           controller: viewModel.passwordController,
-                          hint: "Password"),
+                          hint: "Password",
+                        isPassword: true,
+                      ),
                       SizedBox(
                         height: 20,
                       ),
                       ReusableTextFormField(
                           controller: viewModel.confirmController,
-                          hint: "Confirm Password"),
+                          hint: "Confirm Password",isPassword: true,),
                       SizedBox(
                         height: 20,
                       ),

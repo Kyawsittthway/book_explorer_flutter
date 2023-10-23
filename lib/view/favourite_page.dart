@@ -14,9 +14,9 @@ class FavouritePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Favourite Page"),
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios),onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (_)=>SearchResultPage()));
-        },),
+        // leading: IconButton(icon: Icon(Icons.arrow_back_ios),onPressed: (){
+        //   Navigator.push(context, MaterialPageRoute(builder: (_)=>SearchResultPage()));
+        // },),
       ),
       body: SingleChildScrollView(
         child: Column(
