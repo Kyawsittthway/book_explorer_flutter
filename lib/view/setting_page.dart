@@ -41,8 +41,10 @@ class SettingPage extends StatelessWidget {
                   viewModel.setIsLoading(true);
                   Future.delayed(Duration(milliseconds: 1000), () {
                     viewModel.setIsLoading(false);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => LoginPage()));
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                        LoginPage()), (Route<dynamic> route) => false);
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (_) => LoginPage()));
                   });
                 },
               ),
@@ -59,8 +61,9 @@ class SettingPage extends StatelessWidget {
                  await viewModel.removeUser();
                  defaultShowDialog(context, ACCOUNT_DELETED_TEXT, Icons.delete,true);
                  Future.delayed(Duration(milliseconds: 1000),(){
-
-                   Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginPage()));
+                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                       LoginPage()), (Route<dynamic> route) => false);
+               //    Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginPage()));
                  });
 
                 },

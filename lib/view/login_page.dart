@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                             defaultShowDialog(context,LOGGING_IN_TEXT, Icons.login,false);
                             Future.delayed(Duration(milliseconds: 800), () {
 
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => SearchResultPage()));

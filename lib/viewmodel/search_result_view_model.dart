@@ -21,7 +21,11 @@ class SearchResultViewModel extends ChangeNotifier {
   int currentPage = 1;
   BookDao bookDao;
   SearchResultViewModel(this.bookDao) {
+    chunkedList.clear();
+    bookList.clear();
+    searchController.clear();
     setFavouriteBookList();
+
   }
 
   ///Getters
@@ -61,7 +65,7 @@ class SearchResultViewModel extends ChangeNotifier {
   }
 
   void fetchChunkData() {
-
+    if(bookList.isNotEmpty)
     if (bookList.length <= 10) {
       chunkedList.addAll(bookList);
       hideSeeMore = true;
